@@ -54,3 +54,34 @@ export const getPublicIssues = async(req,res)=>{
         
     }
 };
+
+
+// status chnge of issue by admin
+
+export const updateIssueStatus = async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const {status} = req.body;
+
+        const result = await pool.query(
+            `UPDATE issues 
+            SET status = $1
+            WHERE id = $2
+            RETURNING *`,
+            [status, id]
+        );
+        
+        if (result.rows.length ===0 ){
+            return res.status(404).json({error : "Issue not found"})
+        }
+
+        res.json({
+            message:"Issue status updated successfully",
+            issue : result.rows[0]
+        });
+    }catch(error){
+        console.error(error);
+        res.status(500).json({error : "Failed to update issue status"
+        })
+    };
+};
