@@ -1,4 +1,4 @@
-import pool from "../src/db/db.js";
+import pool from "../db/db.js";
 
 //for creating a new issue by the students
 export const createissue = async (req,res)=>{

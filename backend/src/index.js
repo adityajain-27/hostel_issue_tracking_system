@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import pool from "./db/db.js";
+import pool from "../db/db.js";
 import issueRoutes from "../routes/issueroutes.js";
 dotenv.config();
 //express app initialization
