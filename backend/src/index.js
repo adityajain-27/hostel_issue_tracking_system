@@ -15,15 +15,17 @@ app.use(cors());
 
 app.use("/api/issues", issueRoutes);
 
-app.get("/",async (req,res)=>{
-    try{
-        const result = await pool.query('SELECT NOW()');
-        res.json(result.rows[0]);
-    }catch(error){
-        console.error(error);
-        res.status(500).send('Database connection failed');
-    }
-})
+
+
+// app.get("/",async (req,res)=>{
+//     try{
+//         const result = await pool.query('SELECT NOW()');
+//         res.json(result.rows[0]);
+//     }catch(error){
+//         console.error(error);
+//         res.status(500).send('Database connection failed');
+//     }
+// })
 
 
 app.listen(PORT,()=>{

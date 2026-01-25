@@ -1,5 +1,6 @@
 import pool from "../src/db/db.js";
 
+//for creating a new issue by the students
 export const createissue = async (req,res)=>{
     try{
         const{
@@ -29,3 +30,13 @@ export const createissue = async (req,res)=>{
     }
 };
 
+// for getting all issues on admin dashboard
+export const getAllIssues = async(req,res)=>{
+    try{
+        const result = await pool.query('SELECT * FROM issues ORDER BY created_at DESC');
+        res.status(200).json(result.rows);
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch issues" });
+    }
+}
