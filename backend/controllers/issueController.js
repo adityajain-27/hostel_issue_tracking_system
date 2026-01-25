@@ -40,3 +40,17 @@ export const getAllIssues = async(req,res)=>{
         res.status(500).json({ error: "Failed to fetch issues" });
     }
 }
+
+
+//for showing public issues to all users
+
+export const getPublicIssues = async(req,res)=>{
+    try{
+        const result = await pool.query('SELECT * FROM issues WHERE is_public = true ORDER BY created_at DESC');
+        res.json(result.rows);
+    }catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch public issues" });   
+        
+    }
+};
