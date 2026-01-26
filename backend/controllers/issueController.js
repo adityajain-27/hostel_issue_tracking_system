@@ -133,3 +133,23 @@ export const resolveIssue = async(req,res)=>{
         res.status(500).json({ error: "Failed to resolve issue" });
     }
 };
+
+// showing all private issues of user on student dashboard
+
+export const getMyIssues = async(req,res)=>{
+    try{
+        const userId = req.user.id; // this is from jwt 
+        const result = await pool.query(
+            `SELECT * FROM issues 
+            WHERE user_id = $1
+            ORDER BY created_at DESC`,  
+            [userId]
+        );
+        res.json(result.rows);
+    }
+    catch(error){
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch your issues" });
+    }   
+
+};

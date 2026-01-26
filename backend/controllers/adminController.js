@@ -1,6 +1,8 @@
 import pool from "../db/db.js";
 import bycrypt from "bcrypt";
 
+
+//admin can create or register new students
 export const createStudent = async (req, res) => {
     try{
         const {name,email, password}= req.body;
