@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 // import pool from "../db/db.js";
 import issueRoutes from "../routes/issueroutes.js";
+import authRoutes from "../routes/authRoutes.js";
 dotenv.config();
 //express app initialization
 const app = express();
@@ -13,7 +14,9 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 app.use(cors());
 
+
 app.use("/api/issues", issueRoutes);
+app.use("/api/auth", authRoutes);
 
 
 
