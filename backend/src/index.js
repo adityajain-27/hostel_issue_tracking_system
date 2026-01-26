@@ -28,3 +28,7 @@ app.listen(PORT,()=>{
     console.log(`Server is running on http://localhost:${PORT}/`)
 })
 
+
+
+
+// freezing the backend apis for frontend development and integration
