@@ -20,7 +20,7 @@ const AdminDashboard = () => {
     const [issues, setIssues] = useState([]);
 
 const total = issues.length;
-const pending = issues.filter(i => i.status === "pending").length;
+const pending = issues.filter(i => i.status === "reported").length;
 const resolved = issues.filter(i => i.status === "resolved").length;
 useEffect(() => {
     const fetchAllIssues = async () => {
@@ -49,6 +49,36 @@ useEffect(() => {
     const filteredIssues = activeFilter === 'all'
         ? issues
         : issues.filter(issue => issue.status.toLowerCase().replace(' ', '-') === activeFilter);
+    const openIssue = async (id) => {
+    try {
+        await api.put(`/issues/${id}/open`);
+        setIssues(prev =>
+            prev.map(issue =>
+                issue.id === id
+                    ? { ...issue, status: "in_progress" }
+                    : issue
+            )
+        );
+    } catch (err) {
+        alert("Failed to open issue");
+    }
+};
+
+const resolveIssue = async (id) => {
+    try {
+        await api.put(`/issues/${id}/resolve`);
+        setIssues(prev =>
+            prev.map(issue =>
+                issue.id === id
+                    ? { ...issue, status: "resolved" }
+                    : issue
+            )
+        );
+    } catch (err) {
+        alert("Failed to resolve issue");
+    }
+};
+
 
     return (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -169,11 +199,28 @@ useEffect(() => {
                                                 {issue.status}
                                             </span>
                                         </td>
-                                        <td className="py-4 text-right pr-4">
-                                            <button className="text-slate-400 hover:text-white transition-colors">
-                                                <MoreVertical size={18} />
-                                            </button>
+                                        <td className="py-4 text-right pr-4 space-x-2">
+
+                                            {issue.status === "reported" && (
+                                                <button
+                                                    onClick={() => openIssue(issue.id)}
+                                                    className="px-3 py-1 bg-blue-600 text-white rounded text-xs"
+                                                >
+                                                    Open
+                                                </button>
+                                            )}
+
+                                            {issue.status === "in_progress" && (
+                                                <button
+                                                    onClick={() => resolveIssue(issue.id)}
+                                                    className="px-3 py-1 bg-green-600 text-white rounded text-xs"
+                                                >
+                                                    Resolve
+                                                </button>
+                                            )}
+
                                         </td>
+
                                     </motion.tr>
                                 ))}
                             </AnimatePresence>

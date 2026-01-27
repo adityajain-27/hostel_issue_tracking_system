@@ -9,13 +9,13 @@ const MyIssues = () => {
   const [activeTab, setActiveTab] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [newIssue, setNewIssue] = useState({
-    title: "",
-    location: "",
-    room: "",
-    description: "",
-    priority: "Medium",
-  });
+const [newIssue, setNewIssue] = useState({
+  title: "",
+  description: "",
+  category: "",
+  priority: "Medium",
+});
+
 
   /* ---------------- FETCH MY ISSUES ---------------- */
   useEffect(() => {
@@ -38,31 +38,30 @@ const MyIssues = () => {
 
   /* ---------------- ADD ISSUE ---------------- */
   const handleAddIssue = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    try {
-      const res = await api.post("/issues", {
-        title: newIssue.title,
-        location: `${newIssue.location} ${newIssue.room}`,
-        description: newIssue.description,
-        priority: newIssue.priority,
-        is_public: false,
-      });
+  try {
+    const res = await api.post("/issues", {
+      title: newIssue.title,
+      description: newIssue.description,
+      category: newIssue.category,
+      priority: newIssue.priority,
+      is_public: false,
+    });
 
-      setIssues((prev) => [res.data.issue, ...prev]);
-      setIsModalOpen(false);
-      setNewIssue({
-        title: "",
-        location: "",
-        room: "",
-        description: "",
-        priority: "Medium",
-      });
-    } catch (err) {
-      console.error(err);
-      alert("Failed to submit issue");
-    }
-  };
+    setIssues(prev => [res.data.issue, ...prev]);
+    setIsModalOpen(false);
+
+    setNewIssue({
+      title: "",
+      description: "",
+      category: "",
+      priority: "Medium",
+    });
+  } catch (err) {
+    alert("Failed to submit issue");
+  }
+};
 
   /* ---------------- FILTER ---------------- */
   const filteredIssues =
@@ -166,29 +165,48 @@ const MyIssues = () => {
             >
               <h2 className="text-xl text-white mb-4">Report Issue</h2>
 
-              <form onSubmit={handleAddIssue} className="space-y-4">
-                <input
-                  placeholder="Title"
-                  className="w-full bg-slate-800 p-2 rounded"
-                  value={newIssue.title}
-                  onChange={(e) =>
-                    setNewIssue({ ...newIssue, title: e.target.value })
-                  }
-                />
+             <form onSubmit={handleAddIssue} className="space-y-4">
 
-                <textarea
-                  placeholder="Description"
-                  className="w-full bg-slate-800 p-2 rounded"
-                  value={newIssue.description}
-                  onChange={(e) =>
-                    setNewIssue({ ...newIssue, description: e.target.value })
-                  }
-                />
+  <input
+    placeholder="Title"
+    className="w-full bg-slate-800 p-2 rounded"
+    value={newIssue.title}
+    onChange={(e) =>
+      setNewIssue({ ...newIssue, title: e.target.value })
+    }
+    required
+  />
 
-                <button className="w-full bg-indigo-600 py-2 rounded text-white">
-                  Submit
-                </button>
-              </form>
+  <select
+    className="w-full bg-slate-800 p-2 rounded"
+    value={newIssue.category}
+    onChange={(e) =>
+      setNewIssue({ ...newIssue, category: e.target.value })
+    }
+    required
+  >
+    <option value="">Select Category</option>
+    <option value="Electrical">Electrical</option>
+    <option value="Plumbing">Plumbing</option>
+    <option value="Cleaning">Cleaning</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <textarea
+    placeholder="Description"
+    className="w-full bg-slate-800 p-2 rounded"
+    value={newIssue.description}
+    onChange={(e) =>
+      setNewIssue({ ...newIssue, description: e.target.value })
+    }
+    required
+  />
+
+  <button className="w-full bg-indigo-600 py-2 rounded text-white">
+    Submit
+  </button>
+</form>
+
             </motion.div>
           </div>
         )}
