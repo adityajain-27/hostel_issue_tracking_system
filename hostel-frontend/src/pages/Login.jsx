@@ -132,10 +132,10 @@ const Login = () => {
 
                         <div className="flex items-center justify-between text-sm">
                             <label className="flex items-center text-slate-400 hover:text-slate-300 cursor-pointer">
-                                <input type="checkbox" className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-indigo-500 focus:ring-offset-slate-900" />
-                                <span className="ml-2">Remember me</span>
+                                {/* <input type="checkbox" className="w-4 h-4 rounded border-slate-700 bg-slate-800 text-indigo-500 focus:ring-offset-slate-900" /> */}
+                                {/* <span className="ml-2">Remember me</span> */}
                             </label>
-                            <a href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">Forgot password?</a>
+                            {/* <a href="#" className="text-indigo-400 hover:text-indigo-300 transition-colors">Forgot password?</a> */}
                         </div>
 
                         <button
@@ -156,12 +156,12 @@ const Login = () => {
                         </button>
                     </form>
 
-                    <div className="mt-8 text-center text-sm text-slate-400">
+                    {/* <div className="mt-8 text-center text-sm text-slate-400">
                         Don't have an account?{' '}
                         <Link to="/register" className="font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
                             Register now
                         </Link>
-                    </div>
+                    </div> */}
                 </motion.div>
             </div>
 
