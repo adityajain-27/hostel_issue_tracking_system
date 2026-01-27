@@ -13,43 +13,49 @@ const Login = () => {
     const { login } = useAuth();
 
     // Hardcoded admin credentials for prototype
-    const ADMIN_EMAIL = 'admin@hostelfix.com';
+    // const ADMIN_EMAIL = 'admin@hostelfix.com';
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        setLoading(true);
+    // const handleLogin = (e) => {
+    //     e.preventDefault();
+    //     setLoading(true);
+const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(e.target);
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    const result = await login(email, password);
+
+    if (!result.success) {
+        alert(result.message);
+        setLoading(false);
+        return;
+    }
+
+    // Role-based redirect (from backend)
+    if (result.user?.role === "admin") {
+        navigate("/admin-dashboard");
+    } else {
+        navigate("/student-dashboard");
+    }
+
+    setLoading(false);
+
+
+
+
+
+    
+};
+
+    
+
 
         // Simulate login delay
-        setTimeout(() => {
-            // In a real app, backend would verify credentials and return role
-            // For prototype, we mimic this logic
-            const formData = new FormData(e.target);
-            const email = formData.get('email');
 
-            if (role === 'admin') {
-                if (email === ADMIN_EMAIL) {
-                    login({ name: 'Hostel Admin', email: email, role: 'admin' });
-                    navigate('/admin-dashboard');
-                } else {
-                    alert('Invalid Admin Credentials. Use admin@hostelfix.com');
-                }
-            } else {
-                // Regular student login (simulated for any email for now, or check DB)
-                const usersDb = JSON.parse(localStorage.getItem('hostel_users_db') || '[]');
-                const user = usersDb.find(u => u.email === email);
-
-                if (user) {
-                    login(user);
-                    navigate('/student-dashboard');
-                } else {
-                    // For demo ease, if not found in simplified DB, just log in as student
-                    login({ name: 'Student User', email: email, role: 'student' });
-                    navigate('/student-dashboard');
-                }
-            }
-            setLoading(false);
-        }, 1500);
-    };
+    
 
     return (
         <div className="min-h-[calc(100vh-4rem)] flex relative overflow-hidden">

@@ -1,14 +1,40 @@
-import { useState } from 'react';
+// import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useIssues } from '../context/IssueContext';
+// import { useIssues } from '../context/IssueContext';
+import { useEffect, useState } from "react";
+import api from "../api/axios";
+
 import { useAuth } from '../context/AuthContext';
 import { CheckCircle2, Clock, AlertCircle, Search, Filter, MoreVertical, X, Check } from 'lucide-react';
 import { Navigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
     const { user } = useAuth();
-    const { issues, getStats } = useIssues(); // In real app, might need a function to get ALL issues
-    const { total, pending, resolved } = getStats();
+    // const { issues, getStats } = useIssues(); // In real app, might need a function to get ALL issues
+    // const issues = [];
+// const total = 0;
+// const pending = 0;
+// const resolved = 0;
+
+    // const { total, pending, resolved } = getStats();
+    const [issues, setIssues] = useState([]);
+
+const total = issues.length;
+const pending = issues.filter(i => i.status === "pending").length;
+const resolved = issues.filter(i => i.status === "resolved").length;
+useEffect(() => {
+    const fetchAllIssues = async () => {
+        try {
+            const res = await api.get("/issues");
+            setIssues(res.data);
+        } catch (err) {
+            console.error("Failed to fetch issues", err);
+        }
+    };
+
+    fetchAllIssues();
+}, []);
+
 
     // Admin Guard
     if (user?.role !== 'admin') {

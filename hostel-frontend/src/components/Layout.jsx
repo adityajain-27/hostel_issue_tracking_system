@@ -33,7 +33,7 @@ const Layout = () => {
         { name: 'Logout', action: logout, icon: LogOut, public: true }
     ] : [
         { name: 'Login', path: '/login', icon: LogIn, public: true },
-        { name: 'Register', path: '/register', icon: UserPlus, public: true },
+        // { name: 'Register', path: '/register', icon: UserPlus, public: true },
     ];
 
     const allItems = [...navItems, ...authItems];
