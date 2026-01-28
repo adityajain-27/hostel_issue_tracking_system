@@ -115,6 +115,15 @@ const AdminDashboard = () => {
                                                         <div style={{ marginBottom: '15px' }}>
                                                             <strong style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '5px' }}>DESCRIPTION</strong>
                                                             <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{issue.description}</p>
+                                                            {issue.image_url && (
+                                                                <div style={{ marginTop: '10px' }}>
+                                                                    <img
+                                                                        src={`http://localhost:5000/${issue.image_url}`}
+                                                                        alt="Proof"
+                                                                        style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: '8px', border: '1px solid var(--card-border)' }}
+                                                                    />
+                                                                </div>
+                                                            )}
                                                         </div>
 
                                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>

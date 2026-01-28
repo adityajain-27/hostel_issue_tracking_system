@@ -11,14 +11,21 @@ export const createissue = async (req, res) => {
             is_public = false
         } = req.body;
 
+        console.log("Received Issue Submission:", req.body);
+        console.log("Received File:", req.file);
+
+        // Convert string 'true'/'false' to boolean (FormData sends strings)
+        const isPublicBool = String(is_public) === 'true';
+
         const userId = req.user.id;
+        const image_url = req.file ? req.file.path.replace(/\\/g, "/") : null; // Handle paths for Windows
 
         const result = await pool.query(
             `INSERT INTO issues 
-            (user_id, title, category, priority, description, is_public, status)
-            values ($1, $2, $3, $4, $5, $6, $7)
+            (user_id, title, category, priority, description, is_public, status, image_url)
+            values ($1, $2, $3, $4, $5, $6, $7, $8)
             RETURNING *`,
-            [userId, title, category, priority, description, is_public, 'open']
+            [userId, title, category, priority, description, isPublicBool, 'open', image_url]
         );
 
         res.status(201).json({

@@ -21,6 +21,7 @@ app.use("/api/issues", issueRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/announcements", announcementRoutes);
+app.use("/uploads", express.static("uploads"));
 app.use("/api/lost-found", lostFoundRoutes);
 
 
