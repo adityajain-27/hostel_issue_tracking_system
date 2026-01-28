@@ -1,11 +1,11 @@
 import pool from "../db/db.js";
-import bycrypt from "bcrypt";
+import bcrypt from "bcrypt";
 
 
 //admin can create or register new students
 export const createStudent = async (req, res) => {
-    try{
-        const {name,email, password}= req.body;
+    try {
+        const { name, email, password } = req.body;
 
 
         // now checking for existing user with same email
@@ -14,12 +14,12 @@ export const createStudent = async (req, res) => {
             [email]
         );
 
-        if(existingUser.rows.length >0){
-            return res.status(400).json({message : "User already exists"});
+        if (existingUser.rows.length > 0) {
+            return res.status(400).json({ message: "User already exists" });
         }
 
         //hashing password before storing
-        const hashedPassword = await bycrypt.hash(password,10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         //insert studnts into db
         const result = await pool.query(
@@ -31,10 +31,10 @@ export const createStudent = async (req, res) => {
 
         res.status(201).json({
             message: "Student created successfully",
-            student:result.rows[0]
+            student: result.rows[0]
         });
-    }catch(error){
+    } catch (error) {
         console.error(error);
-        res.status(500).json({ error: "Failed to create student" });    
+        res.status(500).json({ error: "Failed to create student" });
     }
 };

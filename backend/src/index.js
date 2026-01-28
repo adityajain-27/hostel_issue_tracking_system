@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import issueRoutes from "../routes/issueroutes.js";
+import issueRoutes from "../routes/issueRoutes.js";
 import authRoutes from "../routes/authRoutes.js";
 import adminRoutes from "../routes/adminRoutes.js";
 import announcementRoutes from "../routes/announcementRoutes.js";
@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT || 3000
 
 //middleware
-app.use(express.urlencoded({extended : true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
 
@@ -24,7 +24,7 @@ app.use("/api/announcements", announcementRoutes);
 
 
 
-app.listen(PORT,()=>{
+app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}/`)
 })
 
