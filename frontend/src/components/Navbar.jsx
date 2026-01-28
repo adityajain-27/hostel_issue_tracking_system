@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, ClipboardList, UserPlus, Bell } from 'lucide-react';
+import { LogOut, Home, ClipboardList, UserPlus, Bell, Search } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -26,6 +26,12 @@ const Navbar = () => {
                 {user?.role === 'student' && (
                     <NavLink to="/dashboard" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                         <ClipboardList size={18} /> My Issues
+                    </NavLink>
+                )}
+
+                {user && (
+                    <NavLink to="/lost-and-found" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                        <Search size={18} /> Lost & Found
                     </NavLink>
                 )}
 

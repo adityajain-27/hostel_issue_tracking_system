@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import RegisterStudent from './pages/RegisterStudent';
+import LostAndFound from './pages/LostAndFound';
 
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
@@ -45,6 +46,14 @@ function App() {
               element={
                 <ProtectedRoute role="admin">
                   <RegisterStudent />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/lost-and-found"
+              element={
+                <ProtectedRoute>
+                  <LostAndFound />
                 </ProtectedRoute>
               }
             />
