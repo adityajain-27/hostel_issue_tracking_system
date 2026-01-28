@@ -12,6 +12,7 @@
   --error: #ef4444;
   --warning: #f59e0b;
   --glass: blur(12px);
+  color-scheme: dark;
 }
 
 * {
@@ -76,8 +77,13 @@ body {
 
 /* Announcement Ticker animation */
 @keyframes scrollText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
 
 .ticker-container {
@@ -93,4 +99,10 @@ body {
   animation: scrollText 20s linear infinite;
   color: var(--accent-color);
   font-weight: 500;
+}
+
+/* Fix for Select Dropdown Options */
+select option {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
 }

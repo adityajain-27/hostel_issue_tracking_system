@@ -18,7 +18,7 @@ export const createissue = async (req, res) => {
             (user_id, title, category, priority, description, is_public, status)
             values ($1, $2, $3, $4, $5, $6, $7)
             RETURNING *`,
-            [userId, title, category, priority, description, is_public, 'reported']
+            [userId, title, category, priority, description, is_public, 'open']
         );
 
         res.status(201).json({
@@ -34,7 +34,12 @@ export const createissue = async (req, res) => {
 // for getting all issues on admin dashboard
 export const getAllIssues = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM issues ORDER BY created_at DESC');
+        const result = await pool.query(`
+            SELECT issues.*, users.name as student_name 
+            FROM issues 
+            LEFT JOIN users ON issues.user_id = users.id 
+            ORDER BY issues.created_at DESC
+        `);
         res.status(200).json(result.rows);
     } catch (error) {
         console.error(error);
@@ -47,7 +52,13 @@ export const getAllIssues = async (req, res) => {
 
 export const getPublicIssues = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM issues WHERE is_public = true ORDER BY created_at DESC');
+        const result = await pool.query(`
+            SELECT issues.*, users.name as student_name 
+            FROM issues 
+            LEFT JOIN users ON issues.user_id = users.id 
+            WHERE issues.is_public = true 
+            ORDER BY issues.created_at DESC
+        `);
         res.json(result.rows);
     } catch (error) {
         console.error(error);
@@ -142,9 +153,11 @@ export const getMyIssues = async (req, res) => {
     try {
         const userId = req.user.id; // this is from jwt 
         const result = await pool.query(
-            `SELECT * FROM issues 
-            WHERE user_id = $1
-            ORDER BY created_at DESC`,
+            `SELECT issues.*, users.name as student_name 
+            FROM issues 
+            LEFT JOIN users ON issues.user_id = users.id 
+            WHERE issues.user_id = $1
+            ORDER BY issues.created_at DESC`,
             [userId]
         );
         res.json(result.rows);

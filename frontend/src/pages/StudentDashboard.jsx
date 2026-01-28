@@ -13,6 +13,7 @@ const StudentDashboard = () => {
         priority: 'Medium',
         is_public: false
     });
+    const [expandedIssue, setExpandedIssue] = useState(null);
 
     const fetchMyIssues = async () => {
         try {
@@ -113,32 +114,77 @@ const StudentDashboard = () => {
 
             <div>
                 <h2 style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '10px' }}><ClipboardList color="var(--accent-color)" /> My Reported Issues</h2>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <AnimatePresence>
-                        {issues.length > 0 ? issues.map(issue => (
-                            <motion.div
-                                key={issue.id}
-                                initial={{ opacity: 0, scale: 0.95 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                className="glass-card"
-                            >
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start' }}>
-                                    <h3 style={{ fontSize: '1.1rem' }}>{issue.title}</h3>
-                                    <span style={{
-                                        padding: '4px 10px',
-                                        borderRadius: '20px',
-                                        fontSize: '0.7rem',
-                                        fontWeight: 'bold',
-                                        background: issue.status === 'resolved' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(245, 158, 11, 0.2)',
-                                        color: issue.status === 'resolved' ? 'var(--success)' : 'var(--warning)',
-                                        border: `1px solid ${issue.status === 'resolved' ? 'var(--success)' : 'var(--warning)'}`
-                                    }}>
-                                        {issue.status.toUpperCase()}
-                                    </span>
+                        {issues && issues.length > 0 ? (
+                            Object.entries(issues.reduce((acc, issue) => {
+                                const cat = issue.category || 'Other';
+                                acc[cat] = acc[cat] || [];
+                                acc[cat].push(issue);
+                                return acc;
+                            }, {})).map(([category, catIssues]) => (
+                                <div key={category}>
+                                    <h3 style={{ fontSize: '0.75rem', color: 'var(--accent-color)', opacity: 0.8, letterSpacing: '2px', marginBottom: '12px', borderBottom: '1px solid var(--card-border)', paddingBottom: '6px' }}>
+                                        {category.toUpperCase()}
+                                    </h3>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                                        {catIssues.map(issue => (
+                                            <motion.div
+                                                key={issue.id}
+                                                layout
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                className="glass-card"
+                                                style={{ cursor: 'pointer', padding: '15px 20px', border: expandedIssue === issue.id ? '1px solid var(--accent-color)' : '1px solid var(--card-border)' }}
+                                                onClick={() => setExpandedIssue(expandedIssue === issue.id ? null : issue.id)}
+                                            >
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                                    <h3 style={{ fontSize: '1rem', fontWeight: '500' }}>{issue.title}</h3>
+                                                    <span style={{
+                                                        padding: '2px 10px',
+                                                        borderRadius: '12px',
+                                                        fontSize: '0.65rem',
+                                                        fontWeight: 'bold',
+                                                        background: issue.status?.toLowerCase() === 'resolved' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                                                        color: issue.status?.toLowerCase() === 'resolved' ? 'var(--success)' : 'var(--warning)',
+                                                        border: `1px solid ${issue.status?.toLowerCase() === 'resolved' ? 'var(--success)' : 'var(--warning)'}`
+                                                    }}>
+                                                        {issue.status?.toUpperCase() || 'REPORTED'}
+                                                    </span>
+                                                </div>
+
+                                                {expandedIssue === issue.id && (
+                                                    <motion.div
+                                                        initial={{ opacity: 0, height: 0 }}
+                                                        animate={{ opacity: 1, height: 'auto' }}
+                                                        style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid var(--card-border)' }}
+                                                    >
+                                                        <div style={{ marginBottom: '12px' }}>
+                                                            <strong style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>DESCRIPTION</strong>
+                                                            <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.6' }}>{issue.description}</p>
+                                                        </div>
+
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px' }}>
+                                                            <div><strong>Reported by:</strong> {issue.student_name || 'Student'}</div>
+                                                            <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>
+                                                            <div><strong>Date:</strong> {new Date(issue.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+                                                            <div><strong>Time:</strong> {new Date(issue.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
+                                                        </div>
+
+                                                        {issue.admin_note && (
+                                                            <div style={{ marginTop: '15px', padding: '12px', background: 'rgba(59, 130, 246, 0.1)', borderRadius: '10px', borderLeft: '4px solid var(--accent-color)' }}>
+                                                                <strong style={{ color: 'var(--accent-color)', fontSize: '0.75rem', display: 'block', marginBottom: '5px' }}>ADMIN RESPONSE</strong>
+                                                                <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontStyle: 'italic' }}>"{issue.admin_note}"</p>
+                                                            </div>
+                                                        )}
+                                                    </motion.div>
+                                                )}
+                                            </motion.div>
+                                        ))}
+                                    </div>
                                 </div>
-                                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '10px' }}>{issue.description}</p>
-                            </motion.div>
-                        )) : (
+                            ))
+                        ) : (
                             <div style={{ color: 'var(--text-secondary)', textAlign: 'center', padding: '40px' }}>
                                 <Info size={40} style={{ marginBottom: '10px', opacity: 0.5 }} />
                                 <p>No issues reported yet.</p>

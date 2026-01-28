@@ -20,7 +20,7 @@ const AnnouncementTicker = () => {
         <div className="ticker-container">
             <div className="ticker-text">
                 {announcements.length > 0
-                    ? announcements.map(a => `📢 ${a.title}: ${a.content}`).join(' | ')
+                    ? announcements.map(a => `📢 ${a.title}: ${a.message}`).join(' | ')
                     : "Welcome to Hostel Issue Tracking System | No new announcements | Stay updated!"}
             </div>
         </div>
