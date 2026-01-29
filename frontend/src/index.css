@@ -6,12 +6,12 @@
   --bg-primary: #f8fafc;
   --bg-secondary: #f1f5f9;
   --bg-tertiary: #ffffff;
-  
+
   --card-bg: rgba(255, 255, 255, 0.9);
   --card-border: #e2e8f0;
   --card-highlight: #f1f5f9;
   --card-shadow: rgba(0, 0, 0, 0.05);
-  
+
   /* Brand Colors - Professional Blue Palette */
   --primary-50: #eff6ff;
   --primary-100: #dbeafe;
@@ -23,41 +23,41 @@
   --primary-700: #1d4ed8;
   --primary-800: #1e40af;
   --primary-900: #1e3a8a;
-  
+
   /* Success Colors */
   --success-50: #f0fdf4;
   --success-100: #dcfce7;
   --success-500: #10b981;
   --success-600: #059669;
   --success-700: #047857;
-  
+
   /* Warning Colors */
   --warning-50: #fffbeb;
   --warning-100: #fef3c7;
   --warning-500: #f59e0b;
   --warning-600: #d97706;
   --warning-700: #b45309;
-  
+
   /* Error Colors */
   --error-50: #fef2f2;
   --error-100: #fee2e2;
   --error-500: #ef4444;
   --error-600: #dc2626;
   --error-700: #b91c1c;
-  
+
   /* Info Colors */
   --info-50: #f0f9ff;
   --info-100: #e0f2fe;
   --info-500: #06b6d4;
   --info-600: #0891b2;
   --info-700: #0e7490;
-  
+
   /* Text Colors */
   --text-primary: #1e293b;
   --text-secondary: #64748b;
   --text-tertiary: #94a3b8;
   --text-inverse: #ffffff;
-  
+
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --gradient-blue: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
@@ -67,13 +67,13 @@
   --gradient-rainbow: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   --gradient-ocean: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --gradient-sunset: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-  
+
   /* Background Gradients */
-  --bg-gradient-mesh: 
+  --bg-gradient-mesh:
     radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.08) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(118, 75, 162, 0.08) 0px, transparent 50%),
     radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.04) 0px, transparent 50%);
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -83,19 +83,19 @@
   --shadow-glow-primary: 0 0 20px rgba(59, 130, 246, 0.3);
   --shadow-glow-success: 0 0 20px rgba(16, 185, 129, 0.3);
   --shadow-glow-warning: 0 0 20px rgba(245, 158, 11, 0.3);
-  
+
   /* Effects */
   --glass-blur: blur(20px);
   --accent-color: #3b82f6;
   --accent-glow: rgba(59, 130, 246, 0.15);
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 24px;
   --radius-full: 9999px;
-  
+
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -108,22 +108,22 @@
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
   --bg-tertiary: #334155;
-  
+
   --card-bg: rgba(30, 41, 59, 0.8);
   --card-border: #334155;
   --card-highlight: #1e293b;
   --card-shadow: rgba(0, 0, 0, 0.3);
-  
+
   --text-primary: #f1f5f9;
   --text-secondary: #cbd5e1;
   --text-tertiary: #94a3b8;
   --text-inverse: #0f172a;
-  
-  --bg-gradient-mesh: 
+
+  --bg-gradient-mesh:
     radial-gradient(at 0% 0%, rgba(102, 126, 234, 0.12) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(118, 75, 162, 0.12) 0px, transparent 50%),
     radial-gradient(at 50% 50%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
-  
+
   --accent-glow: rgba(59, 130, 246, 0.25);
 }
 
@@ -150,19 +150,41 @@ body {
 }
 
 /* ==================== TYPOGRAPHY ==================== */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--text-primary);
 }
 
-h1 { font-size: 3.5rem; }
-h2 { font-size: 2.5rem; }
-h3 { font-size: 1.875rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 3.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.875rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
 
 p {
   line-height: 1.7;
@@ -413,6 +435,7 @@ input[type="radio"] {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -423,6 +446,7 @@ input[type="radio"] {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -434,6 +458,7 @@ input[type="radio"] {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -445,6 +470,7 @@ input[type="radio"] {
     opacity: 0;
     transform: translateX(-40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -456,6 +482,7 @@ input[type="radio"] {
     opacity: 0;
     transform: translateX(40px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -467,6 +494,7 @@ input[type="radio"] {
     opacity: 0;
     transform: scale(0.9);
   }
+
   to {
     opacity: 1;
     transform: scale(1);
@@ -474,18 +502,24 @@ input[type="radio"] {
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -495,6 +529,7 @@ input[type="radio"] {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -504,6 +539,7 @@ input[type="radio"] {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -513,8 +549,23 @@ input[type="radio"] {
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
+  }
+}
+
+@keyframes expandContent {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+    max-height: 0;
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 2000px;
   }
 }
 
@@ -629,14 +680,22 @@ input[type="radio"] {
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width: 768px) {
-  h1 { font-size: 2.5rem; }
-  h2 { font-size: 2rem; }
-  h3 { font-size: 1.5rem; }
-  
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
   .glass-card {
     padding: 16px;
   }
-  
+
   .btn {
     padding: 10px 20px;
     font-size: 0.9rem;
@@ -644,8 +703,13 @@ input[type="radio"] {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
 }
 
 /* ==================== CUSTOM UTILITIES ==================== */

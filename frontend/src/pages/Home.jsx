@@ -217,7 +217,9 @@ const Home = () => {
                                             style={{
                                                 cursor: 'pointer',
                                                 border: expandedIssue === issue.id ? '2px solid var(--accent-color)' : '1px solid var(--card-border)',
-                                                padding: '20px'
+                                                padding: '20px',
+                                                transition: 'all 0.3s ease',
+                                                background: expandedIssue === issue.id ? 'var(--card-highlight)' : 'var(--card-bg)'
                                             }}
                                             onClick={() => setExpandedIssue(expandedIssue === issue.id ? null : issue.id)}
                                         >
@@ -244,11 +246,11 @@ const Home = () => {
                                                 </div>
 
                                                 {expandedIssue === issue.id && (
-                                                    <motion.div
-                                                        initial={{ opacity: 0, height: 0 }}
-                                                        animate={{ opacity: 1, height: 'auto' }}
-                                                        exit={{ opacity: 0, height: 0 }}
-                                                    >
+                                                    <div style={{
+                                                        paddingTop: '16px',
+                                                        marginTop: '16px',
+                                                        borderTop: '1px solid var(--card-border)'
+                                                    }}>
                                                         <p style={{
                                                             color: 'var(--text-secondary)',
                                                             fontSize: '0.9rem',
@@ -277,7 +279,7 @@ const Home = () => {
                                                                 })}
                                                             </span>
                                                         </div>
-                                                    </motion.div>
+                                                    </div>
                                                 )}
                                             </div>
                                         </motion.div>
@@ -296,8 +298,8 @@ const Home = () => {
                         />
                     )}
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

@@ -369,7 +369,9 @@ const StudentDashboard = () => {
                                         style={{
                                             cursor: 'pointer',
                                             padding: '20px',
-                                            border: expandedIssue === issue.id ? '2px solid var(--accent-color)' : '1px solid var(--card-border)'
+                                            border: expandedIssue === issue.id ? '2px solid var(--accent-color)' : '1px solid var(--card-border)',
+                                            transition: 'all 0.3s ease',
+                                            background: expandedIssue === issue.id ? 'var(--card-highlight)' : 'var(--card-bg)'
                                         }}
                                         onClick={() => setExpandedIssue(expandedIssue === issue.id ? null : issue.id)}
                                     >
@@ -405,117 +407,128 @@ const StudentDashboard = () => {
                                             </div>
                                         </div>
 
-                                        {expandedIssue === issue.id && (
-                                            <div style={{ paddingTop: '16px', borderTop: '1px solid var(--card-border)' }}
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                <div style={{ marginBottom: '16px' }}>
-                                                    <strong style={{
-                                                        fontSize: '0.75rem',
-                                                        color: 'var(--text-secondary)',
-                                                        display: 'block',
-                                                        marginBottom: '6px',
-                                                        letterSpacing: '1px'
-                                                    }}>
-                                                        DESCRIPTION
-                                                    </strong>
-                                                    <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
-                                                        {issue.description}
-                                                    </p>
-                                                    {issue.image_url && (
-                                                        <div style={{ marginTop: '12px' }}>
-                                                            <img
-                                                                src={`http://localhost:5000/${issue.image_url}`}
-                                                                alt="Issue proof"
-                                                                style={{
-                                                                    maxWidth: '100%',
-                                                                    maxHeight: '250px',
-                                                                    borderRadius: 'var(--radius-md)',
-                                                                    border: '1px solid var(--card-border)',
-                                                                    objectFit: 'cover'
-                                                                }}
-                                                            />
-                                                        </div>
-                                                    )}
-                                                </div>
 
-                                                <div style={{
-                                                    display: 'grid',
-                                                    gridTemplateColumns: 'repeat(2, 1fr)',
-                                                    gap: '12px',
-                                                    fontSize: '0.85rem',
-                                                    color: 'var(--text-secondary)',
-                                                    background: 'var(--card-highlight)',
-                                                    padding: '16px',
-                                                    borderRadius: 'var(--radius-md)',
-                                                    marginBottom: '16px'
-                                                }}>
-                                                    <div>
-                                                        <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                                                            Location
-                                                        </strong>
-                                                        {issue.hostel_name} ({issue.block_name}) - Room {issue.room_number}
-                                                    </div>
-                                                    <div>
-                                                        <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                                                            Assigned To
-                                                        </strong>
-                                                        {issue.assigned_staff_name ?
-                                                            `${issue.assigned_staff_name} ${issue.staff_specialty ? `(${issue.staff_specialty})` : ''}` :
-                                                            'Not yet assigned'}
-                                                    </div>
-                                                    <div>
-                                                        <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                                                            Reported On
-                                                        </strong>
-                                                        {new Date(issue.created_at).toLocaleDateString('en-GB', {
-                                                            day: '2-digit',
-                                                            month: 'short',
-                                                            year: 'numeric'
-                                                        })}
-                                                    </div>
-                                                    <div>
-                                                        <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
-                                                            Time
-                                                        </strong>
-                                                        {new Date(issue.created_at).toLocaleTimeString([], {
-                                                            hour: '2-digit',
-                                                            minute: '2-digit'
-                                                        })}
-                                                    </div>
-                                                </div>
-
-                                                {issue.admin_note && (
-                                                    <div style={{
-                                                        marginTop: '16px',
-                                                        padding: '16px',
-                                                        background: 'var(--accent-glow)',
-                                                        borderRadius: 'var(--radius-md)',
-                                                        borderLeft: '4px solid var(--accent-color)'
-                                                    }}>
+                                        <AnimatePresence>
+                                            {expandedIssue === issue.id && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, translateY: -10 }}
+                                                    animate={{ opacity: 1, translateY: 0 }}
+                                                    exit={{ opacity: 0, translateY: -10 }}
+                                                    transition={{ duration: 0.2, ease: "easeOut" }}
+                                                    style={{
+                                                        paddingTop: '16px',
+                                                        borderTop: '1px solid var(--card-border)'
+                                                    }}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                >
+                                                    <div style={{ marginBottom: '16px' }}>
                                                         <strong style={{
-                                                            color: 'var(--accent-color)',
                                                             fontSize: '0.75rem',
+                                                            color: 'var(--text-secondary)',
                                                             display: 'block',
-                                                            marginBottom: '8px',
+                                                            marginBottom: '6px',
                                                             letterSpacing: '1px'
                                                         }}>
-                                                            ADMIN RESPONSE
+                                                            DESCRIPTION
                                                         </strong>
-                                                        <p style={{
-                                                            fontSize: '0.95rem',
-                                                            color: 'var(--text-primary)',
-                                                            fontStyle: 'italic',
-                                                            lineHeight: '1.5'
-                                                        }}>
-                                                            "{issue.admin_note}"
+                                                        <p style={{ color: 'var(--text-primary)', fontSize: '0.95rem', lineHeight: '1.6' }}>
+                                                            {issue.description}
                                                         </p>
+                                                        {issue.image_url && (
+                                                            <div style={{ marginTop: '12px' }}>
+                                                                <img
+                                                                    src={`http://localhost:5000/${issue.image_url}`}
+                                                                    alt="Issue proof"
+                                                                    style={{
+                                                                        maxWidth: '100%',
+                                                                        maxHeight: '250px',
+                                                                        borderRadius: 'var(--radius-md)',
+                                                                        border: '1px solid var(--card-border)',
+                                                                        objectFit: 'cover'
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                        )}
                                                     </div>
-                                                )}
 
-                                                <CommentSection issueId={issue.id} />
-                                            </div>
-                                        )}
+                                                    <div style={{
+                                                        display: 'grid',
+                                                        gridTemplateColumns: 'repeat(2, 1fr)',
+                                                        gap: '12px',
+                                                        fontSize: '0.85rem',
+                                                        color: 'var(--text-secondary)',
+                                                        background: 'var(--card-highlight)',
+                                                        padding: '16px',
+                                                        borderRadius: 'var(--radius-md)',
+                                                        marginBottom: '16px'
+                                                    }}>
+                                                        <div>
+                                                            <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                                                                Location
+                                                            </strong>
+                                                            {issue.hostel_name} ({issue.block_name}) - Room {issue.room_number}
+                                                        </div>
+                                                        <div>
+                                                            <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                                                                Assigned To
+                                                            </strong>
+                                                            {issue.assigned_staff_name ?
+                                                                `${issue.assigned_staff_name} ${issue.staff_specialty ? `(${issue.staff_specialty})` : ''}` :
+                                                                'Not yet assigned'}
+                                                        </div>
+                                                        <div>
+                                                            <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                                                                Reported On
+                                                            </strong>
+                                                            {new Date(issue.created_at).toLocaleDateString('en-GB', {
+                                                                day: '2-digit',
+                                                                month: 'short',
+                                                                year: 'numeric'
+                                                            })}
+                                                        </div>
+                                                        <div>
+                                                            <strong style={{ display: 'block', marginBottom: '4px', fontSize: '0.75rem', color: 'var(--text-tertiary)' }}>
+                                                                Time
+                                                            </strong>
+                                                            {new Date(issue.created_at).toLocaleTimeString([], {
+                                                                hour: '2-digit',
+                                                                minute: '2-digit'
+                                                            })}
+                                                        </div>
+                                                    </div>
+
+                                                    {issue.admin_note && (
+                                                        <div style={{
+                                                            marginTop: '16px',
+                                                            padding: '16px',
+                                                            background: 'var(--accent-glow)',
+                                                            borderRadius: 'var(--radius-md)',
+                                                            borderLeft: '4px solid var(--accent-color)'
+                                                        }}>
+                                                            <strong style={{
+                                                                color: 'var(--accent-color)',
+                                                                fontSize: '0.75rem',
+                                                                display: 'block',
+                                                                marginBottom: '8px',
+                                                                letterSpacing: '1px'
+                                                            }}>
+                                                                ADMIN RESPONSE
+                                                            </strong>
+                                                            <p style={{
+                                                                fontSize: '0.95rem',
+                                                                color: 'var(--text-primary)',
+                                                                fontStyle: 'italic',
+                                                                lineHeight: '1.5'
+                                                            }}>
+                                                                "{issue.admin_note}"
+                                                            </p>
+                                                        </div>
+                                                    )}
+
+                                                    <CommentSection issueId={issue.id} />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
                                     </motion.div>
                                 ))
                             ) : (
