@@ -41,7 +41,7 @@ const Navbar = () => {
                             <ClipboardList size={18} /> Manage Issues
                         </NavLink>
                         <NavLink to="/admin/students" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
-                            <UserPlus size={18} /> Register Student
+                            <UserPlus size={18} /> Register New User
                         </NavLink>
                     </>
                 )}

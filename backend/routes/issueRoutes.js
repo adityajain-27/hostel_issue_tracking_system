@@ -3,14 +3,16 @@ import { createissue } from "../controllers/issueController.js";
 import { getAllIssues } from "../controllers/issueController.js";
 import { getPublicIssues } from "../controllers/issueController.js";
 import { updateIssueStatus } from "../controllers/issueController.js";
-import { openIssue } from "../controllers/issueController.js";
+import { openIssue, getStaff } from "../controllers/issueController.js";
 import { resolveIssue } from "../controllers/issueController.js";
 import { getMyIssues } from "../controllers/issueController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
-import { isAdmin } from "../middlewares/roleMiddleware.js";
-import { isStudent } from "../middlewares/roleMiddleware.js";
+import { isAdmin, isStudent } from "../middlewares/roleMiddleware.js";
 import upload from "../middlewares/uploadMiddleware.js";
 const router = express.Router();
+
+// get /api/issues/staff
+router.get("/staff", authenticate, isAdmin, getStaff);
 
 //get /api/issues/public
 router.get("/public", getPublicIssues);

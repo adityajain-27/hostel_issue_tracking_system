@@ -206,6 +206,7 @@ const StudentDashboard = () => {
                                                             <div><strong>Reported by:</strong> {issue.student_name || 'Student'}</div>
                                                             <div><strong>Location:</strong> {issue.hostel_name} ({issue.block_name}) - Room {issue.room_number}</div>
                                                             <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>
+                                                            <div><strong>Assigned To:</strong> {issue.assigned_staff_name ? `${issue.assigned_staff_name} ${issue.staff_specialty ? `(${issue.staff_specialty})` : ''}` : 'Not yet assigned'}</div>
                                                             <div><strong>Date:</strong> {new Date(issue.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
                                                             <div><strong>Time:</strong> {new Date(issue.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
                                                         </div>

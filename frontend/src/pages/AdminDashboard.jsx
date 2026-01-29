@@ -9,6 +9,8 @@ const AdminDashboard = () => {
     const [issues, setIssues] = useState([]);
     const [expandedIssue, setExpandedIssue] = useState(null);
     const [adminNotes, setAdminNotes] = useState({});
+    const [staff, setStaff] = useState([]);
+    const [assignments, setAssignments] = useState({});
     const [newAnnouncement, setNewAnnouncement] = useState({ title: '', message: '' });
 
     const fetchIssues = async () => {
@@ -20,16 +22,36 @@ const AdminDashboard = () => {
         }
     };
 
+    const fetchStaff = async () => {
+        try {
+            const res = await api.get('/issues/staff');
+            setStaff(res.data);
+        } catch (err) {
+            console.error('Failed to fetch staff');
+        }
+    };
+
     useEffect(() => {
         fetchIssues();
+        fetchStaff();
     }, []);
 
     const handleStatusUpdate = async (id, action) => {
         const loadingToast = toast.loading('Updating status...');
         try {
-            const data = action === 'resolve' ? { admin_note: adminNotes[id] || 'Resolved by admin' } : {};
+            let data = {};
+            if (action === 'resolve') {
+                data = { admin_note: adminNotes[id] || 'Resolved by admin' };
+            } else if (action === 'open') {
+                if (!assignments[id]) {
+                    toast.error('Please assign a staff member', { id: loadingToast });
+                    return;
+                }
+                data = { assigned_user_id: assignments[id] };
+            }
+
             await api.put(`/issues/${id}/${action}`, data);
-            toast.success(`Issue ${action === 'open' ? 'in progress' : 'resolved'}`, { id: loadingToast });
+            toast.success(`Issue ${action === 'open' ? 'assigned' : 'resolved'}`, { id: loadingToast });
             fetchIssues();
             setExpandedIssue(null);
         } catch (err) {
@@ -84,15 +106,35 @@ const AdminDashboard = () => {
                                                             {issue.status?.toUpperCase() || 'REPORTED'}
                                                         </span>
                                                     </div>
-                                                    <div style={{ display: 'flex', gap: '8px' }} onClick={(e) => e.stopPropagation()}>
+                                                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }} onClick={(e) => e.stopPropagation()}>
                                                         {(issue.status?.toLowerCase() === 'reported' || issue.status?.toLowerCase() === 'open') && (
-                                                            <button
-                                                                onClick={() => handleStatusUpdate(issue.id, 'open')}
-                                                                className="btn-primary"
-                                                                style={{ padding: '6px 12px', fontSize: '0.7rem', background: 'var(--accent-color)', boxShadow: 'none' }}
-                                                            >
-                                                                Start
-                                                            </button>
+                                                            <div style={{ display: 'flex', gap: '5px' }}>
+                                                                <select
+                                                                    className="input-field"
+                                                                    style={{ padding: '4px 8px', fontSize: '0.7rem', width: '120px' }}
+                                                                    value={assignments[issue.id] || ''}
+                                                                    onChange={(e) => setAssignments({ ...assignments, [issue.id]: e.target.value })}
+                                                                >
+                                                                    <option value="">Assign To...</option>
+                                                                    {staff.map(s => (
+                                                                        <option key={s.id} value={s.id}>
+                                                                            {s.name} {s.staff_specialty ? `(${s.staff_specialty})` : ''}
+                                                                        </option>
+                                                                    ))}
+                                                                </select>
+                                                                <button
+                                                                    onClick={() => handleStatusUpdate(issue.id, 'open')}
+                                                                    className="btn-primary"
+                                                                    style={{ padding: '6px 12px', fontSize: '0.7rem', background: 'var(--accent-color)', boxShadow: 'none' }}
+                                                                >
+                                                                    Start
+                                                                </button>
+                                                            </div>
+                                                        )}
+                                                        {issue.status?.toLowerCase() === 'in_progress' && (
+                                                            <span style={{ fontSize: '0.7rem', color: 'var(--accent-color)', fontWeight: 'bold' }}>
+                                                                {issue.assigned_staff_name ? `ASSIGNED: ${issue.assigned_staff_name.toUpperCase()} ${issue.staff_specialty ? `(${issue.staff_specialty.toUpperCase()})` : ''}` : 'ASSIGNED'}
+                                                            </span>
                                                         )}
                                                         {issue.status !== 'resolved' && (
                                                             <button

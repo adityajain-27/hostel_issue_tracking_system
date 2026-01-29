@@ -49,9 +49,10 @@ export const createissue = async (req, res) => {
 export const getAllIssues = async (req, res) => {
     try {
         const result = await pool.query(`
-            SELECT issues.*, users.name as student_name 
+            SELECT issues.*, users.name as student_name, assigned_users.name as assigned_staff_name
             FROM issues 
             LEFT JOIN users ON issues.user_id = users.id 
+            LEFT JOIN users as assigned_users ON issues.assigned_user_id = assigned_users.id
             ORDER BY issues.created_at DESC
         `);
         res.status(200).json(result.rows);
@@ -115,23 +116,38 @@ export const updateIssueStatus = async (req, res) => {
 export const openIssue = async (req, res) => {
     try {
         const { id } = req.params;
+        const { assigned_user_id } = req.body;
+
         const result = await pool.query(
             `UPDATE issues 
-            SET status = 'in_progress'
-            WHERE id = $1
+            SET status = 'in_progress', assigned_user_id = $1
+            WHERE id = $2
             RETURNING *`,
-            [id]
+            [assigned_user_id, id]
         );
         if (result.rows.length === 0) {
             return res.status(404).json({ error: "Issue not found" });
         }
         res.json({
-            message: "Issue marked as in progress",
+            message: "Issue marked as in progress and assigned",
             issue: result.rows[0]
         });
     } catch (error) {
         console.error("Database Error in openIssue:", error.message);
         res.status(500).json({ error: `Backend Error: ${error.message}` });
+    }
+};
+
+// Fetch potential staff members/admins for assignment
+export const getStaff = async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT id, name, staff_specialty FROM users WHERE role IN ('admin', 'staff')"
+        );
+        res.json(result.rows);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Failed to fetch staff" });
     }
 };
 
@@ -167,9 +183,10 @@ export const getMyIssues = async (req, res) => {
     try {
         const userId = req.user.id; // this is from jwt 
         const result = await pool.query(
-            `SELECT issues.*, users.name as student_name 
+            `SELECT issues.*, users.name as student_name, assigned_users.name as assigned_staff_name
             FROM issues 
             LEFT JOIN users ON issues.user_id = users.id 
+            LEFT JOIN users as assigned_users ON issues.assigned_user_id = assigned_users.id
             WHERE issues.user_id = $1
             ORDER BY issues.created_at DESC`,
             [userId]
