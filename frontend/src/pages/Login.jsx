@@ -48,7 +48,7 @@ const Login = () => {
                         className="glass-card"
                         style={{ width: '250px', cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}
                     >
-                        <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '20px', borderRadius: '50%' }}>
+                        <div style={{ background: 'var(--accent-glow)', padding: '20px', borderRadius: '50%' }}>
                             <User size={40} color="var(--accent-color)" />
                         </div>
                         <h3>Student Portal</h3>
@@ -62,7 +62,7 @@ const Login = () => {
                         className="glass-card"
                         style={{ width: '250px', cursor: 'pointer', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '15px' }}
                     >
-                        <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '20px', borderRadius: '50%' }}>
+                        <div style={{ background: 'var(--accent-glow)', padding: '20px', borderRadius: '50%' }}>
                             <ShieldCheck size={40} color="var(--accent-color)" />
                         </div>
                         <h3>Admin Portal</h3>

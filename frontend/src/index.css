@@ -1,26 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg-color: #030305;
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.06);
-  --card-highlight: rgba(255, 255, 255, 0.1);
+  --bg-color: #f8fafc;
+  /* Very light off-white/blue-tinted gray */
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --card-highlight: #f1f5f9;
 
-  --primary-gradient: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%);
-  --accent-color: #00c6ff;
-  --accent-glow: rgba(0, 198, 255, 0.4);
+  --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  /* Professional Blue */
+  --accent-color: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.2);
 
-  --success-gradient: linear-gradient(135deg, #42e695 0%, #3bb2b8 100%);
-  --success: #42e695;
+  --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --success: #10b981;
 
-  --warning-gradient: linear-gradient(135deg, #f7971e 0%, #ffd200 100%);
-  --warning: #f7971e;
+  --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --warning: #f59e0b;
 
-  --text-primary: #ffffff;
-  --text-secondary: #94a3b8;
+  --text-primary: #1e293b;
+  /* Slate 800 */
+  --text-secondary: #64748b;
+  /* Slate 500 */
 
   --glass-blur: blur(20px);
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -36,33 +40,9 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   position: relative;
-}
-
-/* Ambient Background Blobs */
-body::before {
-  content: '';
-  position: fixed;
-  top: -10%;
-  left: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(0, 114, 255, 0.15) 0%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-  filter: blur(100px);
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -10%;
-  right: -10%;
-  width: 50vw;
-  height: 50vw;
-  background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 70%);
-  z-index: -1;
-  pointer-events: none;
-  filter: blur(80px);
+  background-image:
+    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(147, 51, 234, 0.05) 0px, transparent 50%);
 }
 
 .glass-card {
@@ -70,18 +50,16 @@ body::after {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--card-border);
-  border-top: 1px solid var(--card-highlight);
-  border-left: 1px solid var(--card-highlight);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05), 0 2px 10px -2px rgba(0, 0, 0, 0.03);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px 0 rgba(0, 198, 255, 0.1);
+  border-color: var(--accent-color);
+  box-shadow: 0 10px 30px -5px rgba(59, 130, 246, 0.1), 0 4px 15px -5px rgba(0, 0, 0, 0.05);
 }
 
 h1,
@@ -131,21 +109,20 @@ h6 {
 }
 
 .input-field {
-  background: rgba(0, 0, 0, 0.2);
+  background: #ffffff;
   border: 1px solid var(--card-border);
-  padding: 14px 18px;
-  border-radius: 14px;
-  color: white;
+  padding: 12px 16px;
+  border-radius: 10px;
+  color: var(--text-primary);
   width: 100%;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   font-size: 0.95rem;
 }
 
 .input-field:focus {
   border-color: var(--accent-color);
-  background: rgba(0, 0, 0, 0.3);
-  box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.1);
+  box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
 /* Announcement Ticker animation */
@@ -186,7 +163,7 @@ select option {
 
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -194,10 +171,10 @@ select option {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: #94a3b8;
 }

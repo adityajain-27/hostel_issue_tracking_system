@@ -41,7 +41,7 @@ const CommentSection = ({ issueId }) => {
 
     return (
         <div style={{ marginTop: '20px', paddingTop: '15px', borderTop: '1px solid var(--card-border)' }}>
-            <h4 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <h4 style={{ fontSize: '0.95rem', color: 'var(--text-primary)', fontWeight: '600', marginBottom: '15px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <MessageCircle size={14} /> Discussion
             </h4>
 
@@ -50,7 +50,7 @@ const CommentSection = ({ issueId }) => {
                 {comments.length > 0 ? (
                     comments.map((c) => (
                         <div key={c.id} style={{
-                            background: 'rgba(255,255,255,0.03)',
+                            background: 'var(--card-highlight)',
                             padding: '10px',
                             borderRadius: '8px',
                             borderLeft: c.author_role === 'admin' ? '3px solid var(--accent-color)' : '3px solid var(--text-secondary)'
@@ -63,7 +63,7 @@ const CommentSection = ({ issueId }) => {
                                     {new Date(c.created_at).toLocaleString([], { dateStyle: 'short', timeStyle: 'short' })}
                                 </span>
                             </div>
-                            <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>{c.content}</p>
+                            <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', margin: 0 }}>{c.content}</p>
                         </div>
                     ))
                 ) : (

@@ -171,9 +171,9 @@ const StudentDashboard = () => {
                                                         borderRadius: '12px',
                                                         fontSize: '0.65rem',
                                                         fontWeight: 'bold',
-                                                        background: issue.status?.toLowerCase() === 'resolved' ? 'rgba(16, 185, 129, 0.15)' : 'rgba(245, 158, 11, 0.15)',
+                                                        background: issue.status?.toLowerCase() === 'resolved' ? 'rgba(16, 185, 129, 0.1)' : 'rgba(245, 158, 11, 0.1)',
                                                         color: issue.status?.toLowerCase() === 'resolved' ? 'var(--success)' : 'var(--warning)',
-                                                        border: `1px solid ${issue.status?.toLowerCase() === 'resolved' ? 'var(--success)' : 'var(--warning)'}`
+                                                        border: `1px solid ${issue.status?.toLowerCase() === 'resolved' ? 'rgba(16, 185, 129, 0.3)' : 'rgba(245, 158, 11, 0.3)'}`
                                                     }}>
                                                         {issue.status?.toUpperCase() || 'REPORTED'}
                                                     </span>
@@ -202,7 +202,7 @@ const StudentDashboard = () => {
                                                             <CommentSection issueId={issue.id} />
                                                         </div>
 
-                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px' }}>
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'var(--card-highlight)', padding: '12px', borderRadius: '8px' }}>
                                                             <div><strong>Reported by:</strong> {issue.student_name || 'Student'}</div>
                                                             <div><strong>Location:</strong> {issue.hostel_name} ({issue.block_name}) - Room {issue.room_number}</div>
                                                             <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>

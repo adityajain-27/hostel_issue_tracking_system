@@ -13,10 +13,10 @@ const Layout = ({ children }) => {
             </main>
             <Toaster position="top-right" toastOptions={{
                 style: {
-                    background: '#18181b',
-                    color: '#fff',
+                    background: '#ffffff',
+                    color: 'var(--text-primary)',
                     border: '1px solid var(--card-border)',
-                    backdropFilter: 'blur(10px)'
+                    boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                 }
             }} />
         </div>

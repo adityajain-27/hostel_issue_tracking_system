@@ -170,7 +170,7 @@ const AdminDashboard = () => {
                                                             <CommentSection issueId={issue.id} />
                                                         </div>
 
-                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>
+                                                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'var(--card-highlight)', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>
                                                             <div><strong>Student:</strong> {issue.student_name || 'Student'}</div>
                                                             <div><strong>Location:</strong> {issue.hostel_name} / {issue.block_name} / {issue.room_number}</div>
                                                             <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>
@@ -193,7 +193,7 @@ const AdminDashboard = () => {
                                                         )}
 
                                                         {issue.admin_note && (
-                                                            <div style={{ marginTop: '15px', padding: '12px', background: 'rgba(59, 130, 246, 0.08)', borderRadius: '10px', borderLeft: '4px solid var(--accent-color)' }}>
+                                                            <div style={{ marginTop: '15px', padding: '12px', background: 'var(--accent-glow)', borderRadius: '10px', borderLeft: '4px solid var(--accent-color)' }}>
                                                                 <strong style={{ color: 'var(--accent-color)', fontSize: '0.7rem', display: 'block', marginBottom: '5px' }}>ADMIN NOTE</strong>
                                                                 <p style={{ fontSize: '0.9rem', color: 'var(--text-primary)', fontStyle: 'italic' }}>"{issue.admin_note}"</p>
                                                             </div>

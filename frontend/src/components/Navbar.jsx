@@ -19,28 +19,28 @@ const Navbar = () => {
             </div>
 
             <div style={{ display: 'flex', gap: '25px', alignItems: 'center' }}>
-                <NavLink to="/" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                <NavLink to="/" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                     <Home size={18} /> Home
                 </NavLink>
 
                 {user?.role === 'student' && (
-                    <NavLink to="/dashboard" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                    <NavLink to="/dashboard" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                         <ClipboardList size={18} /> My Issues
                     </NavLink>
                 )}
 
                 {user && (
-                    <NavLink to="/lost-and-found" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                    <NavLink to="/lost-and-found" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                         <Search size={18} /> Lost & Found
                     </NavLink>
                 )}
 
                 {user?.role === 'admin' && (
                     <>
-                        <NavLink to="/admin" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                        <NavLink to="/admin" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                             <ClipboardList size={18} /> Manage Issues
                         </NavLink>
-                        <NavLink to="/admin/students" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'white', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
+                        <NavLink to="/admin/students" style={({ isActive }) => ({ color: isActive ? 'var(--accent-color)' : 'var(--text-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '5px' })}>
                             <UserPlus size={18} /> Register New User
                         </NavLink>
                     </>
