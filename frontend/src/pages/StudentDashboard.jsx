@@ -3,6 +3,7 @@ import api from '../services/api';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlusCircle, ClipboardList, Info } from 'lucide-react';
+import CommentSection from '../components/CommentSection';
 
 const StudentDashboard = () => {
     const [issues, setIssues] = useState([]);
@@ -182,7 +183,8 @@ const StudentDashboard = () => {
                                                     <motion.div
                                                         initial={{ opacity: 0, height: 0 }}
                                                         animate={{ opacity: 1, height: 'auto' }}
-                                                        style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid var(--card-border)' }}
+                                                        style={{ marginTop: '15px', paddingTop: '15px', borderTop: '1px solid var(--card-border)', cursor: 'default' }}
+                                                        onClick={(e) => e.stopPropagation()}
                                                     >
                                                         <div style={{ marginBottom: '12px' }}>
                                                             <strong style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', display: 'block', marginBottom: '4px' }}>DESCRIPTION</strong>
@@ -196,10 +198,13 @@ const StudentDashboard = () => {
                                                                     />
                                                                 </div>
                                                             )}
+
+                                                            <CommentSection issueId={issue.id} />
                                                         </div>
 
                                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px' }}>
                                                             <div><strong>Reported by:</strong> {issue.student_name || 'Student'}</div>
+                                                            <div><strong>Location:</strong> {issue.hostel_name} ({issue.block_name}) - Room {issue.room_number}</div>
                                                             <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>
                                                             <div><strong>Date:</strong> {new Date(issue.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
                                                             <div><strong>Time:</strong> {new Date(issue.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>

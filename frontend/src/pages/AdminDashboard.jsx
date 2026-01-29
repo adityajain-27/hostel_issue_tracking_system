@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import api from '../services/api';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
-import { CheckCircle, Clock, AlertCircle, Send } from 'lucide-react';
+import { ClipboardList, CheckCircle, Clock, AlertTriangle, PlayCircle, AlertCircle, Send } from 'lucide-react';
+import CommentSection from '../components/CommentSection';
 
 const AdminDashboard = () => {
     const [issues, setIssues] = useState([]);
@@ -124,10 +125,12 @@ const AdminDashboard = () => {
                                                                     />
                                                                 </div>
                                                             )}
+                                                            <CommentSection issueId={issue.id} />
                                                         </div>
 
                                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', fontSize: '0.8rem', color: 'var(--text-secondary)', background: 'rgba(255,255,255,0.02)', padding: '12px', borderRadius: '8px', marginBottom: '15px' }}>
                                                             <div><strong>Student:</strong> {issue.student_name || 'Student'}</div>
+                                                            <div><strong>Location:</strong> {issue.hostel_name} / {issue.block_name} / {issue.room_number}</div>
                                                             <div><strong>Priority:</strong> {issue.priority || 'Medium'}</div>
                                                             <div><strong>Date:</strong> {new Date(issue.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
                                                             <div><strong>Time:</strong> {new Date(issue.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>

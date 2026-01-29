@@ -6,6 +6,7 @@ import authRoutes from "../routes/authRoutes.js";
 import adminRoutes from "../routes/adminRoutes.js";
 import announcementRoutes from "../routes/announcementRoutes.js";
 import lostFoundRoutes from "../routes/lostFoundRoutes.js";
+import commentRoutes from "../routes/commentRoutes.js";
 dotenv.config();
 //express app initialization
 const app = express();
@@ -23,6 +24,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/announcements", announcementRoutes);
 app.use("/uploads", express.static("uploads"));
 app.use("/api/lost-found", lostFoundRoutes);
+app.use("/api/comments", commentRoutes);
 
 
 

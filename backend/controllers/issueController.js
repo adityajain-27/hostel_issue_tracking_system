@@ -20,12 +20,19 @@ export const createissue = async (req, res) => {
         const userId = req.user.id;
         const image_url = req.file ? req.file.path.replace(/\\/g, "/") : null; // Handle paths for Windows
 
+        // Fetch user's hostel details for auto-tagging
+        const userDetails = await pool.query(
+            `SELECT hostel_name, block_name, room_number FROM users WHERE id = $1`,
+            [userId]
+        );
+        const { hostel_name, block_name, room_number } = userDetails.rows[0] || {};
+
         const result = await pool.query(
             `INSERT INTO issues 
-            (user_id, title, category, priority, description, is_public, status, image_url)
-            values ($1, $2, $3, $4, $5, $6, $7, $8)
+            (user_id, title, category, priority, description, is_public, status, image_url, hostel_name, block_name, room_number)
+            values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING *`,
-            [userId, title, category, priority, description, isPublicBool, 'open', image_url]
+            [userId, title, category, priority, description, isPublicBool, 'open', image_url, hostel_name, block_name, room_number]
         );
 
         res.status(201).json({

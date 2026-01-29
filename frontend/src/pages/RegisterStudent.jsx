@@ -5,7 +5,14 @@ import { motion } from 'framer-motion';
 import { UserPlus, Mail, Lock, User } from 'lucide-react';
 
 const RegisterStudent = () => {
-    const [formData, setFormData] = useState({ name: '', email: '', password: '' });
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        hostel_name: '',
+        block_name: '',
+        room_number: ''
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,7 +20,14 @@ const RegisterStudent = () => {
         try {
             await api.post('/admin/create-student', formData);
             toast.success('Student registered successfully!', { id: loadingToast });
-            setFormData({ name: '', email: '', password: '' });
+            setFormData({
+                name: '',
+                email: '',
+                password: '',
+                hostel_name: '',
+                block_name: '',
+                room_number: ''
+            });
         } catch (err) {
             toast.error(err.response?.data?.message || 'Registration failed', { id: loadingToast });
         }
@@ -44,6 +58,32 @@ const RegisterStudent = () => {
                         style={{ paddingLeft: '40px' }}
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                    />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '15px' }}>
+                    <input
+                        type="text"
+                        placeholder="Hostel Name"
+                        className="input-field"
+                        value={formData.hostel_name}
+                        onChange={(e) => setFormData({ ...formData, hostel_name: e.target.value })}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Block"
+                        className="input-field"
+                        value={formData.block_name}
+                        onChange={(e) => setFormData({ ...formData, block_name: e.target.value })}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Room No"
+                        className="input-field"
+                        value={formData.room_number}
+                        onChange={(e) => setFormData({ ...formData, room_number: e.target.value })}
                         required
                     />
                 </div>
