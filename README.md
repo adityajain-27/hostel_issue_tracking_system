@@ -13,7 +13,7 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 - **Real-time Tracking** - Track issue status from reported → in-progress → resolved
 - **Role-based Access** - Separate portals for students and administrators
 - **Comment System** - Interactive discussion threads on each issue
-- **Lost & Found** - Dedicated section for reporting lost and found items
+- **Lost & Found** - Dedicated section for reporting lost and found items  
 
 ### 🎨 User Experience
 - **Premium UI/UX** - Modern glassmorphism design with smooth animations
