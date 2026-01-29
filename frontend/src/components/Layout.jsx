@@ -11,10 +11,12 @@ const Layout = ({ children }) => {
             </main>
             <Toaster position="top-right" toastOptions={{
                 style: {
-                    background: '#ffffff',
+                    background: 'var(--card-bg)',
                     color: 'var(--text-primary)',
                     border: '1px solid var(--card-border)',
                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+                    backdropFilter: 'blur(8px)',
+                    WebkitBackdropFilter: 'blur(8px)',
                 }
             }} />
         </div>
