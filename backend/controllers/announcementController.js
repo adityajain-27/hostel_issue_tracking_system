@@ -2,7 +2,7 @@ import pool from "../db/db.js";
 
 export const createAnnouncement = async (req, res) => {
     try {
-        const { title, message } = req.body;    
+        const { title, message } = req.body;
         const result = await pool.query(
             `INSERT INTO announcements (title, message)
             VALUES ($1, $2)
@@ -17,7 +17,7 @@ export const createAnnouncement = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to create announcement" });
-    }   
+    }
 };
 
 export const getAllAnnouncements = async (req, res) => {
@@ -29,5 +29,5 @@ export const getAllAnnouncements = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Failed to fetch announcements" });
-    }   
+    }
 };
