@@ -294,7 +294,7 @@ const Login = () => {
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         type="submit"
-                        className="btn-primary btn-lg"
+                        className="btn btn-primary btn-lg"
                         style={{
                             width: '100%',
                             marginTop: '8px'
