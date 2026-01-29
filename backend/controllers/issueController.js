@@ -32,7 +32,7 @@ export const createissue = async (req, res) => {
             (user_id, title, category, priority, description, is_public, status, image_url, hostel_name, block_name, room_number)
             values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
             RETURNING *`,
-            [userId, title, category, priority, description, isPublicBool, 'open', image_url, hostel_name, block_name, room_number]
+            [userId, title, category, priority, description, isPublicBool, 'reported', image_url, hostel_name, block_name, room_number]
         );
 
         res.status(201).json({
@@ -43,40 +43,6 @@ export const createissue = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: "Failed to create issue" });
     }
-  try {
-    const {
-      title,
-      category,
-      priority,
-      description,
-      is_public
-    } = req.body;
-
-    const result = await pool.query(
-      `INSERT INTO issues 
-      (user_id, title, category, priority, description, is_public, status)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      RETURNING *`,
-      [
-        req.user.id,        // 🔥 FIX IS HERE
-        title,
-        category,
-        priority || "Medium",
-        description,
-        is_public ?? false,
-        "reported"
-      ]
-    );
-
-    res.status(201).json({
-      message: "Issue created successfully",
-      issue: result.rows[0]
-    });
-
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to create issue" });
-  }
 };
 
 
