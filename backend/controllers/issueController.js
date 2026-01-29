@@ -43,7 +43,42 @@ export const createissue = async (req, res) => {
         console.error(error);
         res.status(500).json({ error: "Failed to create issue" });
     }
+  try {
+    const {
+      title,
+      category,
+      priority,
+      description,
+      is_public
+    } = req.body;
+
+    const result = await pool.query(
+      `INSERT INTO issues 
+      (user_id, title, category, priority, description, is_public, status)
+      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      RETURNING *`,
+      [
+        req.user.id,        // 🔥 FIX IS HERE
+        title,
+        category,
+        priority || "Medium",
+        description,
+        is_public ?? false,
+        "reported"
+      ]
+    );
+
+    res.status(201).json({
+      message: "Issue created successfully",
+      issue: result.rows[0]
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to create issue" });
+  }
 };
+
 
 // for getting all issues on admin dashboard
 export const getAllIssues = async (req, res) => {
