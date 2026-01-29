@@ -61,7 +61,7 @@ const LostAndFound = () => {
                 <h2 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                     <Search color="var(--accent-color)" /> Lost & Found
                 </h2>
-                <button onClick={() => setShowForm(!showForm)} className="btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <button onClick={() => setShowForm(!showForm)} className="btn btn-primary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <PlusCircle size={18} /> {showForm ? 'Cancel' : 'Post Item'}
                 </button>
             </div>
@@ -109,7 +109,7 @@ const LostAndFound = () => {
                                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                 required
                             />
-                            <button type="submit" className="btn-primary">Post</button>
+                            <button type="submit" className="btn btn-primary">Post</button>
                         </form>
                     </motion.div>
                 )}

@@ -136,7 +136,7 @@ const RegisterStudent = () => {
                         required
                     />
                 </div>
-                <button type="submit" className="btn-primary">Create Account</button>
+                <button type="submit" className="btn btn-primary">Create Account</button>
             </form>
         </motion.div>
     );

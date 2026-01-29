@@ -8,6 +8,7 @@ import StudentDashboard from './pages/StudentDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 import RegisterStudent from './pages/RegisterStudent';
 import LostAndFound from './pages/LostAndFound';
+import Announcements from './pages/Announcements';
 
 const ProtectedRoute = ({ children, role }) => {
   const { user, loading } = useAuth();
@@ -54,6 +55,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <LostAndFound />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/announcements"
+              element={
+                <ProtectedRoute>
+                  <Announcements />
                 </ProtectedRoute>
               }
             />
