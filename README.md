@@ -49,7 +49,7 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 - **Multer** - File upload handling
 - **CORS** - Cross-origin resource sharing
 
-## 📦 Installation
+## 📦 Local Installation
 
 ### Prerequisites
 - Node.js (v16 or higher)
@@ -73,22 +73,15 @@ npm install
 cp .env.example .env
 # Edit .env with your database credentials and JWT secret
 
-# Set up the database (run SQL schema)
-psql -U your_username -d your_database -f schema.sql
+# Set up the database
+# 1. Create a database in PostgreSQL
+# 2. Run the schema file
+psql -U your_username -d your_database -f database/schema.sql
+# 3. (Optional) Run the seed file for demo data
+psql -U your_username -d your_database -f database/seed.sql
 
 # Start the development server
 npm run dev
-```
-
-**Environment Variables (.env):**
-```env
-PORT=5000
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=your_username
-DB_PASSWORD=your_password
-DB_NAME=hostel_management
-JWT_SECRET=your_secret_key
 ```
 
 ### 3. Frontend Setup
@@ -102,9 +95,49 @@ npm install
 npm run dev
 ```
 
-The application will be available at:
-- **Frontend**: http://localhost:5173
-- **Backend**: http://localhost:5000
+## 🚀 Deployment Guide for Hackathons
+
+This project is optimized for deployment on **Neon (Database)**, **Render (Backend)**, and **Vercel (Frontend)**.
+
+### 1. Database (Neon)
+1. Create a free PostgreSQL project on [Neon.tech](https://neon.tech).
+2. Copy the **Connection String**.
+3. Use the **SQL Editor** in Neon to run the contents of `backend/database/schema.sql`.
+4. (Optional) Run `backend/database/seed.sql` to populate demo data.
+
+### 2. Backend (Render)
+1. Create a new **Web Service** on [Render.com](https://render.com).
+2. Connect your repository.
+3. Set **Root Directory** to `backend`.
+4. Add Environment Variables:
+   - `DATABASE_URL`: (Paste Neon Connection String)
+   - `JWT_SECRET`: (Your secret key)
+   - `NODE_ENV`: `production`
+
+### 3. Frontend (Vercel)
+1. Import project into [Vercel](https://vercel.com).
+2. Set **Root Directory** to `frontend`.
+3. Add Environment Variables:
+   - `VITE_API_URL`: (Your Render Backend URL, e.g., `https://your-app.onrender.com/api`)
+4. Deploy!
+
+## 🔐 Environment Variables
+
+### Backend (.env)
+| Variable | Description | Local Example | Production Example |
+|----------|-------------|---------------|-------------------|
+| `PORT` | Server Port | `5000` | (Auto-set by Render) |
+| `DB_HOST` | Database Host | `localhost` | (Not needed if using DATABASE_URL) |
+| `DB_USER` | Database User | `postgres` | (Not needed if using DATABASE_URL) |
+| `DB_PASSWORD` | Database Password | `password` | (Not needed if using DATABASE_URL) |
+| `DB_NAME` | Database Name | `hostel_db` | (Not needed if using DATABASE_URL) |
+| `DATABASE_URL` | Full Connection String | (Optional) | `postgres://user:pass@host.neon.tech/db` |
+| `JWT_SECRET` | Secret for Tokens | `secret123` | `complex_production_secret` |
+
+### Frontend
+| Variable | Description | Local | Production (Vercel) |
+|----------|-------------|-------|---------------------|
+| `VITE_API_URL` | Backend API URL | `http://localhost:5000/api` | `https://your-app.onrender.com/api` |
 
 ## 🚀 Usage
 
@@ -116,6 +149,7 @@ The application will be available at:
 5. **Lost & Found** - Report lost items or claim found items
 
 ### For Administrators
+- **Default Admin Login**: `admin@hostel.com` / `admin123` (if seeded)
 1. **Login** - Access the admin portal with your credentials
 2. **Dashboard** - View all reported issues and statistics
 3. **Manage Issues** - Assign staff, update status, and add notes
@@ -131,10 +165,9 @@ hostel_issue_tracking_system/
 │   │   ├── controllers/    # Request handlers
 │   │   ├── middleware/     # Authentication & validation
 │   │   ├── routes/         # API routes
-│   │   ├── config/         # Database configuration
-│   │   └── index.js        # Entry point
-│   ├── uploads/            # User-uploaded files
-│   └── package.json
+│   │   ├── index.js        # Entry point
+│   ├── database/           # SQL schema and seed files
+│   └── uploads/            # User-uploaded files
 │
 ├── frontend/
 │   ├── src/
@@ -144,20 +177,9 @@ hostel_issue_tracking_system/
 │   │   ├── services/       # API services
 │   │   ├── index.css       # Global styles
 │   │   └── App.jsx         # Root component
-│   ├── public/             # Static assets
-│   └── package.json
-│
+│   └── public/             # Static assets
 └── README.md
 ```
-
-## 🎨 Design Features
-
-- **Glassmorphism UI** - Modern frosted glass effect
-- **Smooth Animations** - Framer Motion powered transitions
-- **Premium Gradients** - Eye-catching gradient backgrounds
-- **Responsive Grid Layouts** - Adapts to any screen size
-- **Interactive Feedback** - Hover effects and micro-interactions
-- **Color-coded Status** - Visual distinction for issue states
 
 ## 🔒 Security
 
