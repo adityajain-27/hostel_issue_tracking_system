@@ -12,14 +12,14 @@ const connectionConfig = {
     } : false
 };
 
-// Fallback for local development if DATABASE_URL is not set
+// fallback for local development if DATABASE_URL is not set
 if (!process.env.DATABASE_URL) {
     connectionConfig.user = process.env.DB_USER;
     connectionConfig.password = process.env.DB_PASSWORD;
     connectionConfig.host = process.env.DB_HOST;
     connectionConfig.port = process.env.DB_PORT;
     connectionConfig.database = process.env.DB_NAME;
-    delete connectionConfig.connectionString; // Remove if empty
+    delete connectionConfig.connectionString; // remove if empty
 }
 
 const pool = new Pool(connectionConfig);
