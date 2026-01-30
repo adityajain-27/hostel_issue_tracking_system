@@ -205,10 +205,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👨‍💻 Author
+## 👨‍💻 Authors
 
 **Aditya Jain**
 - GitHub: [@adityajain-27](https://github.com/adityajain-27)
+- Role: Backend Development, Database Design, Deployment
+
+**[Collaborator Name]**
+- GitHub: [@collaborator-username](https://github.com/collaborator-username)
+- Role: Frontend Development, UI/UX Design
 
 ## 🙏 Acknowledgments
 
