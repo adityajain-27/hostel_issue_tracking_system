@@ -8,15 +8,15 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 
 ## 🌐 Live Demo
 
-🚀 **[View Live Application](https://your-deployed-app.vercel.app)** ← *Replace with your actual Vercel URL*
+🚀 **[View Live Application](https://hostel-issue-tracking-system-djck49zsy.vercel.app/)** 
 
 ### Demo Credentials
 Test the application with these accounts:
 
 | Role | Email | Password |
 |------|-------|----------|
-| 👨‍💼 Admin | `admin@hostel.com` | `admin123` |
-| 🎓 Student | `student@hostel.com` | `student123` |
+| 👨‍💼 Admin | `admin@example.com` | `admin123` |
+| 🎓 Student | `student@example.com` | `student123` |
 
 > **Note:** Demo data is reset periodically. Feel free to create test issues and explore all features!
 
