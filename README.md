@@ -6,6 +6,22 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 ![Node](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)
 ![React](https://img.shields.io/badge/react-18.x-61dafb.svg)
 
+## 🌐 Live Demo
+
+🚀 **[View Live Application](https://your-deployed-app.vercel.app)** ← *Replace with your actual Vercel URL*
+
+### Demo Credentials
+Test the application with these accounts:
+
+| Role | Email | Password |
+|------|-------|----------|
+| 👨‍💼 Admin | `admin@hostel.com` | `admin123` |
+| 🎓 Student | `student@hostel.com` | `student123` |
+
+> **Note:** Demo data is reset periodically. Feel free to create test issues and explore all features!
+
+---
+
 ## ✨ Features
 
 ### 🎯 Core Functionality
