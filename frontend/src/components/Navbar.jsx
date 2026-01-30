@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, ClipboardList, UserPlus, Search, Menu, X, Megaphone } from 'lucide-react';
+import { LogOut, Home, ClipboardList, Users, Search, Menu, X, Megaphone, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
+import NotificationBell from './NotificationBell';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
@@ -37,9 +38,14 @@ const Navbar = () => {
             </NavLink>
 
             {user?.role === 'student' && (
-                <NavLink to="/dashboard" style={navLinkStyle}>
-                    <ClipboardList size={18} /> My Issues
-                </NavLink>
+                <>
+                    <NavLink to="/dashboard" style={navLinkStyle}>
+                        <ClipboardList size={18} /> My Issues
+                    </NavLink>
+                    <NavLink to="/chat" style={navLinkStyle}>
+                        <MessageCircle size={18} /> Messages
+                    </NavLink>
+                </>
             )}
 
             {user && (
@@ -59,7 +65,7 @@ const Navbar = () => {
                         <ClipboardList size={18} /> Manage Issues
                     </NavLink>
                     <NavLink to="/admin/students" style={navLinkStyle}>
-                        <UserPlus size={18} /> Register User
+                        <Users size={18} /> Students
                     </NavLink>
                 </>
             )}
@@ -104,6 +110,8 @@ const Navbar = () => {
             <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }} className="desktop-nav">
                 {navLinks}
 
+                {user && <NotificationBell />}
+
                 <ThemeToggle />
 
                 {user ? (
@@ -125,6 +133,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <div style={{ display: 'none' }} className="mobile-menu-btn">
+                {user && <NotificationBell />}
                 <ThemeToggle />
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -1,4 +1,5 @@
 import pool from "../db/db.js";
+import { createNotification } from "./notificationController.js";
 
 //for creating a new issue by the students
 export const createissue = async (req, res) => {
@@ -129,9 +130,30 @@ export const openIssue = async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({ error: "Issue not found" });
         }
+
+        const issue = result.rows[0];
+
+        // Create notification for the student
+        await createNotification(
+            issue.user_id,
+            'issue_updated',
+            'Issue Update',
+            `Your issue "${issue.title}" is now being worked on.`,
+            issue.id,
+            'issue'
+        );
+
+        // Emit socket event if available
+        if (req.app.get('io')) {
+            req.app.get('io').to(`user_${issue.user_id}`).emit('notification', {
+                type: 'issue_updated',
+                message: 'Your issue is now in progress'
+            });
+        }
+
         res.json({
             message: "Issue marked as in progress and assigned",
-            issue: result.rows[0]
+            issue: issue
         });
     } catch (error) {
         console.error("Database Error in openIssue:", error.message);
@@ -168,9 +190,30 @@ export const resolveIssue = async (req, res) => {
         if (result.rows.length === 0) {
             return res.status(404).json({ error: "Issue not found" });
         }
+
+        const issue = result.rows[0];
+
+        // Create notification for the student
+        await createNotification(
+            issue.user_id,
+            'issue_resolved',
+            'Issue Resolved',
+            `Your issue "${issue.title}" has been resolved. ${admin_note}`,
+            issue.id,
+            'issue'
+        );
+
+        // Emit socket event if available
+        if (req.app.get('io')) {
+            req.app.get('io').to(`user_${issue.user_id}`).emit('notification', {
+                type: 'issue_resolved',
+                message: 'Your issue has been resolved'
+            });
+        }
+
         res.json({
             message: "Issue resolved successfully",
-            issue: result.rows[0]
+            issue: issue
         });
     } catch (error) {
         console.error("Database Error in resolveIssue:", error.message);
