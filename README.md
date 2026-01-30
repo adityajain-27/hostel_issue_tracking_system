@@ -30,6 +30,8 @@ Test the application with these accounts:
 - **Role-based Access** - Separate portals for students and administrators
 - **Comment System** - Interactive discussion threads on each issue
 - **Lost & Found** - Dedicated section for reporting lost and found items  
+- **💬 Real-time Chat** - Direct messaging between students and administrators
+- **🔔 Live Notifications** - Instant alerts for issue updates and new messages
 
 ### 🎨 User Experience
 - **Premium UI/UX** - Modern glassmorphism design with smooth animations
@@ -37,6 +39,7 @@ Test the application with these accounts:
 - **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
 - **News & Announcements** - Keep students informed with important updates
 - **Search & Filter** - Easily find issues by category, status, or keywords
+- **Notification Bell** - Real-time notification badge with dropdown panel
 
 ### 👨‍💼 Admin Features
 - **Issue Management Dashboard** - Overview of all reported issues with statistics
@@ -44,6 +47,15 @@ Test the application with these accounts:
 - **Status Updates** - Update issue progress and add administrative notes
 - **User Management** - Manage student and staff registrations
 - **Announcement Creation** - Post news and updates for all users
+- **👥 Student Management** - View all registered students with search functionality
+- **📋 Student Detail View** - See student profiles, hostel info, and complete issue history
+- **💬 Direct Messaging** - Chat with individual students in real-time
+- **🗑️ Unregister Students** - Soft-delete students while preserving historical data
+
+### 🎓 Student Features  
+- **Real-time Notifications** - Get instantly notified when issues are resolved or updated
+- **Admin Chat** - Dedicated messaging page to communicate with administration
+- **Message Alerts** - Receive notifications for new messages from admin
 
 ## 🛠️ Tech Stack
 
@@ -59,8 +71,9 @@ Test the application with these accounts:
 ### Backend
 - **Node.js** - JavaScript runtime
 - **Express** - Web application framework
-- **PostgreSQL** - Relational database
-- **JWT** - Authentication
+- **PostgreSQL** - Relational database (Neon for cloud hosting)
+- **Socket.io** - Real-time bidirectional communication
+- **JWT** - Authentication and WebSocket auth
 - **bcrypt** - Password hashing
 - **Multer** - File upload handling
 - **CORS** - Cross-origin resource sharing
@@ -93,7 +106,9 @@ cp .env.example .env
 # 1. Create a database in PostgreSQL
 # 2. Run the schema file
 psql -U your_username -d your_database -f database/schema.sql
-# 3. (Optional) Run the seed file for demo data
+# 3. Run the new features migration (chat, notifications, student management)
+psql -U your_username -d your_database -f database/schema_updates.sql
+# 4. (Optional) Run the seed file for demo data
 psql -U your_username -d your_database -f database/seed.sql
 
 # Start the development server
@@ -118,7 +133,9 @@ This project is optimized for deployment on **Neon (Database)**, **Render (Backe
 ### 1. Database (Neon)
 1. Create a free PostgreSQL project on [Neon.tech](https://neon.tech).
 2. Copy the **Connection String**.
-3. Use the **SQL Editor** in Neon to run the contents of `backend/database/schema.sql`.
+3. Use the **SQL Editor** in Neon to run:
+   - First: `backend/database/schema.sql` (creates base tables)
+   - Then: `backend/database/schema_updates.sql` (adds chat, notifications, student management)
 4. (Optional) Run `backend/database/seed.sql` to populate demo data.
 
 ### 2. Backend (Render)
@@ -162,15 +179,22 @@ This project is optimized for deployment on **Neon (Database)**, **Render (Backe
 2. **Report Issues** - Submit new issues with descriptions and images
 3. **Track Progress** - Monitor the status of your reported issues
 4. **Engage** - Comment on issues and communicate with admins
-5. **Lost & Found** - Report lost items or claim found items
+5. **💬 Chat with Admin** - Send direct messages via the Messages page
+6. **🔔 Notifications** - Get real-time alerts when issues are resolved or receive messages
+7. **Lost & Found** - Report lost items or claim found items
 
 ### For Administrators
 - **Default Admin Login**: `admin@hostel.com` / `admin123` (if seeded)
 1. **Login** - Access the admin portal with your credentials
 2. **Dashboard** - View all reported issues and statistics
-3. **Manage Issues** - Assign staff, update status, and add notes
-4. **Post Announcements** - Keep students informed
-5. **User Management** - Create student and staff accounts
+3. **Manage Issues** - Assign staff, update status, and add notes (triggers student notifications)
+4. **👥 Student Management** - View list of all registered students, search by name/hostel
+5. **📋 Student Details** - View individual student profiles with issue history and chat
+6. **💬 Direct Chat** - Message any student in real-time from their profile page
+7. **🗑️ Unregister Students** - Deactivate student accounts (preserves issue history)
+8. **🔔 Notifications** - Receive alerts when students send messages
+9. **Post Announcements** - Keep students informed
+10. **User Management** - Create student and staff accounts
 
 ## 📁 Project Structure
 
