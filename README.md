@@ -227,8 +227,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - GitHub: [@adityajain-27](https://github.com/adityajain-27)
 - Role: Backend Development, Database Design, Deployment
 
-**[Collaborator Name]**
-- GitHub: [@collaborator-username](https://github.com/collaborator-username)
+**Sweety**
+- GitHub: [Sweety3106](https://github.com/collaborator-username)
 - Role: Frontend Development, UI/UX Design
 
 ## 🙏 Acknowledgments
