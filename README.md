@@ -228,7 +228,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Role: Backend Development, Database Design, Deployment
 
 **Sweety**
-- GitHub: [Sweety3106](https://github.com/collaborator-username)
+- GitHub: [@Sweety3106](https://github.com/collaborator-username)
 - Role: Frontend Development, UI/UX Design
 
 ## 🙏 Acknowledgments
