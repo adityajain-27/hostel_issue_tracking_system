@@ -8,7 +8,7 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 
 ## 🌐 Live Demo
 
-🚀 **[View Live Application](https://hostel-issue-tracking-system-gwnqqc8i9.vercel.app/)** 
+🚀 **[View Live Application](https://hostel-issue-tracking-system-fg3tbxp83.vercel.app/)** 
 
 ### Demo Credentials
 
