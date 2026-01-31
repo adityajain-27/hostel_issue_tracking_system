@@ -11,6 +11,7 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 🚀 **[View Live Application](https://hostel-issue-tracking-system-djck49zsy.vercel.app/)** 
 
 ### Demo Credentials
+
 Test the application with these accounts:
 
 | Role | Email | Password |
@@ -18,7 +19,12 @@ Test the application with these accounts:
 | 👨‍💼 Admin | `admin@example.com` | `admin123` |
 | 🎓 Student | `student@example.com` | `student123` |
 
-> **Note:** Demo data is reset periodically. Feel free to create test issues and explore all features!
+> 🚨 **IMPORTANT - Shared Demo Environment:**
+> - This demo runs on **Neon's free tier (500MB storage limit)**
+> - Please **do NOT upload large images** or create excessive test data
+> - Be respectful - others are testing too!
+> - Demo data may be **reset without notice** if storage approaches limit
+> - For full testing, please **deploy your own instance** (see [Deployment Guide](#-deployment-guide-for-hackathons) below)
 
 ---
 
