@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, Home, ClipboardList, Users, Search, Menu, X, Megaphone, MessageCircle } from 'lucide-react';
+import { LogOut, Home, ClipboardList, Users, Search, Menu, X, Megaphone, MessageCircle, UserPlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import NotificationBell from './NotificationBell';
@@ -66,6 +66,9 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink to="/admin/students" style={navLinkStyle}>
                         <Users size={18} /> Students
+                    </NavLink>
+                    <NavLink to="/admin/register-student" style={navLinkStyle}>
+                        <UserPlus size={18} /> Register User
                     </NavLink>
                 </>
             )}
