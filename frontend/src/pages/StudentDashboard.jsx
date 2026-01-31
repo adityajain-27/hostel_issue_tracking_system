@@ -168,7 +168,7 @@ const StudentDashboard = () => {
                             </label>
                             <input
                                 type="text"
-                                placeholder="e.g., Leaking Fan in Room 301"
+                                placeholder="e.g., Leaking Pipe in Room 301"
                                 className="input-field"
                                 value={formData.title}
                                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
