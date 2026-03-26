@@ -8,7 +8,7 @@ A modern, full-stack web application for efficient hostel issue management. Buil
 
 ## 🌐 Live Demo
 
-🚀 **[View Live Application](https://hostel-issue-tracking-system-fg3tbxp83.vercel.app/)** 
+🚀 **[View Live Application](https://jolly-bush-0baf95600.4.azurestaticapps.net/)** 
 
 ### Demo Credentials
 
@@ -134,7 +134,7 @@ npm run dev
 
 ## 🚀 Deployment Guide for Hackathons
 
-This project is optimized for deployment on **Neon (Database)**, **Render (Backend)**, and **Vercel (Frontend)**.
+This project is optimized for deployment on **Neon (Database)**, **Azure App Service (Backend)**, and **Azure Static Web Apps (Frontend)**.
 
 ### 1. Database (Neon)
 1. Create a free PostgreSQL project on [Neon.tech](https://neon.tech).
@@ -144,28 +144,29 @@ This project is optimized for deployment on **Neon (Database)**, **Render (Backe
    - Then: `backend/database/schema_updates.sql` (adds chat, notifications, student management)
 4. (Optional) Run `backend/database/seed.sql` to populate demo data.
 
-### 2. Backend (Render)
-1. Create a new **Web Service** on [Render.com](https://render.com).
-2. Connect your repository.
-3. Set **Root Directory** to `backend`.
-4. Add Environment Variables:
+### 2. Backend (Azure App Service)
+1. In the Azure Portal, create a new **Web App**.
+2. Run your deployment via GitHub Actions (or choose Node.js runtime).
+3. Set **Startup Command** to `node src/index.js` (if necessary).
+4. Go to **Settings > Environment variables** and add:
    - `DATABASE_URL`: (Paste Neon Connection String)
    - `JWT_SECRET`: (Your secret key)
-   - `NODE_ENV`: `production`
+   - `PORT`: `8080` (or leave default if Azure manages binding)
 
-### 3. Frontend (Vercel)
-1. Import project into [Vercel](https://vercel.com).
-2. Set **Root Directory** to `frontend`.
-3. Add Environment Variables:
-   - `VITE_API_URL`: (Your Render Backend URL, e.g., `https://your-app.onrender.com/api`)
-4. Deploy!
+### 3. Frontend (Azure Static Web Apps)
+1. Create a new **Static Web App** in Azure Portal.
+2. Link it to your GitHub Repository.
+3. Choose **React** or **Vite** preset, and set **App location** to `frontend`, **Output location** to `dist`.
+4. The deployment will configure a GitHub Actions workflow automatically.
+5. Note: In the generated `.github/workflows` file, make sure to add an `env` block under the steps specifying:
+   - `VITE_API_URL`: (Your Azure Backend URL, e.g., `https://hostel-flow-backend-....azurewebsites.net/api`)
 
 ## 🔐 Environment Variables
 
 ### Backend (.env)
 | Variable | Description | Local Example | Production Example |
 |----------|-------------|---------------|-------------------|
-| `PORT` | Server Port | `5000` | (Auto-set by Render) |
+| `PORT` | Server Port | `5000` | (Auto-set by Azure) |
 | `DB_HOST` | Database Host | `localhost` | (Not needed if using DATABASE_URL) |
 | `DB_USER` | Database User | `postgres` | (Not needed if using DATABASE_URL) |
 | `DB_PASSWORD` | Database Password | `password` | (Not needed if using DATABASE_URL) |
@@ -174,9 +175,9 @@ This project is optimized for deployment on **Neon (Database)**, **Render (Backe
 | `JWT_SECRET` | Secret for Tokens | `secret123` | `complex_production_secret` |
 
 ### Frontend
-| Variable | Description | Local | Production (Vercel) |
+| Variable | Description | Local | Production (Azure) |
 |----------|-------------|-------|---------------------|
-| `VITE_API_URL` | Backend API URL | `http://localhost:5000/api` | `https://your-app.onrender.com/api` |
+| `VITE_API_URL` | Backend API URL | `http://localhost:5000/api` | `https://hostel-flow-backend.azurewebsites.net/api` |
 
 ## 🚀 Usage
 
