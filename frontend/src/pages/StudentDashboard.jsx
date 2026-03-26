@@ -437,7 +437,7 @@ const StudentDashboard = () => {
                                                         {issue.image_url && (
                                                             <div style={{ marginTop: '12px' }}>
                                                                 <img
-                                                                    src={`http://localhost:5000/${issue.image_url}`}
+                                                                    src={`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:5000'}/${issue.image_url}`}
                                                                     alt="Issue proof"
                                                                     style={{
                                                                         maxWidth: '100%',
