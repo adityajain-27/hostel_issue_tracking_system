@@ -4,7 +4,8 @@ import jwt from "jsonwebtoken";
 
 export const login = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const email = req.body.email?.trim() || "";
+        const password = req.body.password?.trim() || "";
         console.log(`[LOGIN ATTEMPT] Email: ${email}`);
 
         //checking usr exists - step 1
